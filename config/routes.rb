@@ -1,3 +1,3 @@
 Kingraveninsults::Application.routes.draw do
-  root to: "staticpages#index"
+  root to: "StaticPages#index"
 end
