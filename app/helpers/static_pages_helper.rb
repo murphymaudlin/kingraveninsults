@@ -11,7 +11,7 @@ module StaticPagesHelper
     "<VP>" => :verb_phrase
   }
   
-  SENTENCE_LENGTH_WEIGHTS = [0, 0, 0, 100, 200]
+  SENTENCE_LENGTH_WEIGHTS = [0, 0, 20, 100, 150, 200, 100, 50, 10, 5, 1, 1]
   
   NOUNS = {
     "bad" => nil,
@@ -69,6 +69,7 @@ module StaticPagesHelper
   INSULT_TEMPLATES = {
     "You're a <NP>" => nil,
     "You're a <NP> and a <NP>" => nil,
+    "You're a <NP> and a <NP> to boot" => 1,
     "You're a <NP> and a <NP>, not to mention a <NP>" => 5,
     "You're just a <NP>" => nil,
     "Such a <NP>" => nil,
@@ -115,10 +116,10 @@ module StaticPagesHelper
     
     probabilities_sum = SENTENCE_LENGTH_WEIGHTS.inject(&:+)
     SENTENCE_LENGTH_WEIGHTS.each_with_index do |weight, i|
-      return insult(i) if weight > rand(probabilities_sum)
+      return swap_a_for_an(insult(i)) if weight > rand(probabilities_sum)
       probabilities_sum -= weight
     end
-    insult
+    swap_a_for_an(insult)
   end
   
   def evaluate_template(template)
@@ -177,6 +178,21 @@ module StaticPagesHelper
   
   def permit_insult?(insult, length)
     permit_length?(insult, length) && (PREVENT_REPEATS && !repeated_words?(insult))
+  end
+  
+  def swap_a_for_an(string)
+    words = string.split(' ')
+    
+    i = 0
+    while i < words.length - 1
+      if words[i] == 'a' && words[i + 1].start_with?(%w{a e i o u})
+        words[i] = 'an'
+      end
+      
+      i += 1
+    end
+    
+    words.join(' ')
   end
 end
 
