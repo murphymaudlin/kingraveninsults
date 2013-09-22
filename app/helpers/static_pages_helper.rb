@@ -114,7 +114,7 @@ module StaticPagesHelper
   def generate_insult(with_weights = true)
     return insult unless with_weights
 
-    swap_a_for_an(insult(pick_length))
+    swap_a_for_an(insult(pick_length)) + "~"
   end
   
   def evaluate_template(template)
@@ -235,5 +235,16 @@ class T
     end
     
     nil
+  end
+  
+  def self.repeated_words?(n = 1000)
+    tester = T.new
+    
+    n.times do
+      current = tester.generate_insult
+      return true if tester.repeated_words? current
+    end
+    
+    false
   end
 end
