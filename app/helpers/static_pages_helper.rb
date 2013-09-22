@@ -182,10 +182,15 @@ module StaticPagesHelper
   
   def swap_a_for_an(string)
     words = string.split(' ')
-    
+    puts "words: #{words}"
     i = 0
-    while i < words.length - 1
-      if words[i] == 'a' && words[i + 1].start_with?(%w{a e i o u})
+    puts "words length: #{words.length}, i = #{i}"
+    while i < (words.length - 1)
+      puts "in loop, i = #{i}, words[i] = #{words[i]} and words[i+ 1] = #{words[i + 1]}"
+      puts "words[i] == a is #{words[i] == 'a'}"
+      puts "words[i + 1] starts with #{words[i + 1].start_with?('e')}"
+      if words[i] == 'a' && words[i + 1].start_with?('a', 'e', 'i', 'o', 'u')
+        "within"
         words[i] = 'an'
       end
       
