@@ -11,6 +11,8 @@ module StaticPagesHelper
     "<VP>" => :verb_phrase
   }
   
+  SENTENCE_LENGTH_WEIGHTS = [0, 0, 0, 100, 200]
+  
   NOUNS = {
     "bad" => nil,
     "plant" => nil,
@@ -36,8 +38,7 @@ module StaticPagesHelper
     "blasted" => nil,
     "rolled" => nil,
     "shitted" => nil,
-    "fucked" => nil,
-    "licked" => nil
+    "fucked" => nil
   }
   
   ADJECTIVES = {
@@ -48,7 +49,6 @@ module StaticPagesHelper
     "huge" => nil,
     "mammoth" => nil,
     "massive" => nil,
-    "incredible" => nil,
     "shitty" => nil
   }
     
@@ -102,8 +102,23 @@ module StaticPagesHelper
     evaluate_template(weighted_sample(VERB_PHRASE_TEMPLATES))
   end
   
-  def insult
-    evaluate_template(weighted_sample(INSULT_TEMPLATES))
+  def insult(length = nil)
+    result = evaluate_template(weighted_sample(INSULT_TEMPLATES))
+    until permit_insult?(result, length)
+      result = evaluate_template(weighted_sample(INSULT_TEMPLATES))
+    end
+    result
+  end
+  
+  def generate_insult(with_weights = true)
+    return insult unless with_weights
+    
+    probabilities_sum = SENTENCE_LENGTH_WEIGHTS.inject(&:+)
+    SENTENCE_LENGTH_WEIGHTS.each_with_index do |weight, i|
+      return insult(i) if weight > rand(probabilities_sum)
+      probabilities_sum -= weight
+    end
+    insult
   end
   
   def evaluate_template(template)
@@ -112,11 +127,9 @@ module StaticPagesHelper
     
       result = template.dup
       CODE_MEANINGS.each do |code, method_name|
-        raise "too long" if result.length > MAX_LENGTH
         result.gsub!(code) { |c| send(method_name) } if result.match(code)
       end
       
-      raise "repeated words" if PREVENT_REPEATS && repeated_words?(result)
       result
     rescue
       return evaluate_template(template)
@@ -155,6 +168,15 @@ module StaticPagesHelper
       i += 1
     end
     false
+  end
+  
+  def permit_length?(sentence, length)
+    return true unless length
+    sentence.split(' ').count == length
+  end
+  
+  def permit_insult?(insult, length)
+    permit_length?(insult, length) && (PREVENT_REPEATS && !repeated_words?(insult))
   end
 end
 
