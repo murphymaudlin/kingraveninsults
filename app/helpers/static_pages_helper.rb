@@ -114,7 +114,7 @@ module StaticPagesHelper
   def generate_insult(with_weights = true)
     return insult unless with_weights
 
-    swap_a_for_an(insult(pick_length)) + "~"
+    swap_a_for_an(insult(pick_length))
   end
   
   def evaluate_template(template)
