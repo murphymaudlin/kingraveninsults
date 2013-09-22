@@ -47,7 +47,6 @@ module StaticPagesHelper
     "feeding" => nil,
     "huge" => nil,
     "mammoth" => nil,
-    "brazilian" => nil,
     "massive" => nil,
     "incredible" => nil,
     "shitty" => nil
