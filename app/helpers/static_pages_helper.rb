@@ -11,7 +11,7 @@ module StaticPagesHelper
     "<VP>" => :verb_phrase
   }
   
-  SENTENCE_LENGTH_WEIGHTS = [0, 0, 20, 100, 150, 200, 100, 50, 10, 5, 1, 1]
+  SENTENCE_LENGTH_WEIGHTS = [0, 0, 10, 50, 200, 200, 100, 10, 2, 2, 1]
   
   NOUNS = {
     "bad" => nil,
@@ -113,13 +113,8 @@ module StaticPagesHelper
   
   def generate_insult(with_weights = true)
     return insult unless with_weights
-    
-    probabilities_sum = SENTENCE_LENGTH_WEIGHTS.inject(&:+)
-    SENTENCE_LENGTH_WEIGHTS.each_with_index do |weight, i|
-      return swap_a_for_an(insult(i)) if weight > rand(probabilities_sum)
-      probabilities_sum -= weight
-    end
-    swap_a_for_an(insult)
+
+    swap_a_for_an(insult(pick_length))
   end
   
   def evaluate_template(template)
@@ -182,15 +177,10 @@ module StaticPagesHelper
   
   def swap_a_for_an(string)
     words = string.split(' ')
-    puts "words: #{words}"
+    
     i = 0
-    puts "words length: #{words.length}, i = #{i}"
     while i < (words.length - 1)
-      puts "in loop, i = #{i}, words[i] = #{words[i]} and words[i+ 1] = #{words[i + 1]}"
-      puts "words[i] == a is #{words[i] == 'a'}"
-      puts "words[i + 1] starts with #{words[i + 1].start_with?('e')}"
       if words[i] == 'a' && words[i + 1].start_with?('a', 'e', 'i', 'o', 'u')
-        "within"
         words[i] = 'an'
       end
       
@@ -199,9 +189,51 @@ module StaticPagesHelper
     
     words.join(' ')
   end
+  
+  def pick_length
+    probabilities_sum = SENTENCE_LENGTH_WEIGHTS.inject(&:+)
+    SENTENCE_LENGTH_WEIGHTS.each_with_index do |weight, i|
+      return i if weight > rand(probabilities_sum)
+      probabilities_sum -= weight
+    end
+    return nil
+  end
 end
 
 class T
   include StaticPagesHelper
+  
+  def self.length_freq(n = 1000)
+    tester = T.new
+    
+    results = Hash.new(1).tap do |results|
+      n.times do 
+        current = tester.pick_length
+        results[current] += 1
+      end
+    end
+    
+    results.each do |freq, count|
+      puts "#{count} instances of #{freq} (out of #{n})"
+    end
+    
+    nil
+  end
+  
+  def self.insult_freq(n = 1000)
+    tester = T.new
+    
+    results = Hash.new(1).tap do |results|
+      n.times do 
+        current = tester.generate_insult
+        results[current.split(' ').size] += 1
+      end
+    end
+    
+    results.each do |freq, count|
+      puts "#{count} instances of #{freq}-length insults (out of #{n})"
+    end
+    
+    nil
+  end
 end
-t = T.new
