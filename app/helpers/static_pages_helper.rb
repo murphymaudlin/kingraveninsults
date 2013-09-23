@@ -5,6 +5,7 @@ module StaticPagesHelper
   
   CODE_MEANINGS = {
     "<N>" => :noun,
+    "<NS>" => :noun_singlet,
     "<V>" => :verb,
     "<A>" => :adjective,
     "<NP>" => :noun_phrase,
@@ -30,7 +31,17 @@ module StaticPagesHelper
     "mad" => nil,
     "feeder" => nil,
     "bitch" => nil,
-    "ass" => nil
+    "ass" => nil,
+    "can" => nil,
+    "dick" => nil,
+    "nub" => nil
+  }
+  
+  NOUN_SINGLETS = {
+    "tryhard" => nil,
+    "shitter" => nil,
+    "whale" => 5,
+    "walrus" => 5
   }
   
   VERBS = {
@@ -39,7 +50,9 @@ module StaticPagesHelper
     "rolled" => nil,
     "shitted" => nil,
     "fucked" => nil,
-    "canned" => nil
+    "canned" => nil,
+    "roasted" => nil,
+    "YOLO swagged" => 1
   }
   
   ADJECTIVES = {
@@ -55,6 +68,7 @@ module StaticPagesHelper
     
   NOUN_PHRASE_TEMPLATES = {
     "<N>"     => nil,
+    "<NS>" => 50,
     "<N><N>"     => nil,
     "<NP> <NP>" => 50,
     "<A> <NP>" => nil
@@ -64,7 +78,8 @@ module StaticPagesHelper
     "<V>" => nil,
     "<V> on" => nil,
     "<N><V>" => nil,
-    "<VP> and <VP>" => 10
+    "<VP> and <VP>" => 10,
+    "fucking <VP>" => nil
   }
   
   INSULT_TEMPLATES = {
@@ -85,6 +100,10 @@ module StaticPagesHelper
   
   def noun
     weighted_sample(NOUNS)
+  end
+  
+  def noun_singlet
+    weighted_sample(NOUN_SINGLETS)
   end
   
   def verb
