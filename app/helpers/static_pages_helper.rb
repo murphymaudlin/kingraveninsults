@@ -38,7 +38,8 @@ module StaticPagesHelper
     "blasted" => nil,
     "rolled" => nil,
     "shitted" => nil,
-    "fucked" => nil
+    "fucked" => nil,
+    "canned" => nil
   }
   
   ADJECTIVES = {
