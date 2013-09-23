@@ -1,160 +1,229 @@
 
 module StaticPagesHelper
-  MAX_LENGTH = 200
-  PREVENT_REPEATS = true
+  DEFAULT = {
+    max_length: 200,
+    prevent_repeats: true,
   
-  CODE_MEANINGS = {
-    "<N>" => :noun,
-    "<NS>" => :noun_singlet,
-    "<V>" => :verb,
-    "<A>" => :adjective,
-    "<NP>" => :noun_phrase,
-    "<VP>" => :verb_phrase
-  }
+    code_meanings: {
+      "<N>" => :noun,
+      "<NS>" => :noun_singlet,
+      "<V>" => :verb,
+      "<A>" => :adjective,
+      "<NP>" => :noun_phrase,
+      "<VP>" => :verb_phrase
+    },
   
-  SENTENCE_LENGTH_WEIGHTS = [0, 0, 10, 50, 200, 200, 100, 10, 2, 2, 1]
+    sentence_length_weights: [0, 0, 10, 50, 200, 200, 100, 10, 2, 2, 1],
   
-  NOUNS = {
-    "bad" => nil,
-    "plant" => nil,
-    "planter" => nil,
-    "dumpster" => nil,
-    "fat" => nil,
-    "kid" => nil,
-    "nerd" => nil,
-    "garbage" => nil,
-    "trash" => nil,
-    "scum" => nil,
-    "pub" => nil,
-    "clown" => nil,
-    "fuck" => nil,
-    "mad" => nil,
-    "feeder" => nil,
-    "bitch" => nil,
-    "ass" => nil,
-    "can" => nil,
-    "dick" => nil,
-    "nub" => nil,
-    "bin" => nil
-  }
+    nouns: {
+      "bad" => nil,
+      "plant" => nil,
+      "planter" => nil,
+      "dumpster" => nil,
+      "fat" => nil,
+      "kid" => nil,
+      "nerd" => nil,
+      "garbage" => nil,
+      "trash" => nil,
+      "scum" => nil,
+      "pub" => nil,
+      "clown" => nil,
+      "fuck" => nil,
+      "mad" => nil,
+      "feeder" => nil,
+      "bitch" => nil,
+      "ass" => nil,
+      "can" => nil,
+      "dick" => nil,
+      "nub" => nil,
+      "bin" => nil
+    },
   
-  NOUN_SINGLETS = {
-    "tryhard" => nil,
-    "shitter" => nil,
-    "whale" => 5,
-    "walrus" => 5
-  }
+    noun_singlets: {
+      "tryhard" => nil,
+      "shitter" => nil,
+      "whale" => 5,
+      "walrus" => 5
+    },
   
-  VERBS = {
-    "wrecked" => nil,
-    "blasted" => nil,
-    "rolled" => nil,
-    "shitted" => nil,
-    "fucked" => nil,
-    "canned" => nil,
-    "roasted" => nil,
-    "YOLO swagged" => 1
-  }
+    verbs: {
+      "wrecked" => nil,
+      "blasted" => nil,
+      "rolled" => nil,
+      "shitted" => nil,
+      "fucked" => nil,
+      "canned" => nil,
+      "roasted" => nil,
+      "YOLO swagged" => 10,
+      "rolled" => nil
+    },
   
-  ADJECTIVES = {
-    "planting" => nil,
-    "fucking" => nil,
-    "typical" => nil,
-    "feeding" => nil,
-    "huge" => nil,
-    "mammoth" => nil,
-    "massive" => nil,
-    "shitty" => nil
-  }
+    adjectives: {
+      "planting" => nil,
+      "fucking" => nil,
+      "typical" => nil,
+      "feeding" => nil,
+      "huge" => nil,
+      "mammoth" => nil,
+      "massive" => nil,
+      "shitty" => nil,
+      "public" => nil
+    },
     
-  NOUN_PHRASE_TEMPLATES = {
-    "<N>"     => nil,
-    "<NS>" => 50,
-    "<N><N>"     => nil,
-    "<NP> <NP>" => 50,
-    "<A> <NP>" => nil
+    noun_phrase_templates: {
+      "<N>"     => nil,
+      "<NS>" => 50,
+      "<N><N>"     => nil,
+      "<NP> <NP>" => 50,
+      "<A> <NP>" => nil
+    },
+  
+    verb_phrase_templates: {
+      "<V>" => nil,
+      "<V> on" => nil,
+      "<N><V>" => nil,
+      "<VP> and <VP>" => 10,
+      "fucking <VP>" => nil
+    },
+  
+    insult_templates: {
+      "You're a <NP>" => nil,
+      "You're a <NP> and a <NP>" => nil,
+      "You're a <NP> and a <NP> to boot" => 1,
+      "You're a <NP> and a <NP>, not to mention a <NP>" => 10,
+      "You're just a <NP>" => nil,
+      "Such a <NP>" => nil,
+      "Get <VP>" => nil,
+      "Get <VP>, <NP>" => nil,
+      "Get <VP>, you <NP>" => nil,
+      "You're like a <NP> getting <VP>" => 10,
+      "You get <VP> every day of the week you <NP>" => 10,
+      "Don't forget to get <VP>, <NP>" => 10,
+      "Typical <NP>" => nil,
+      "<NP> detected" => nil,
+      "I've never seen such a <A> <NP>" => 4
+    }
   }
   
-  VERB_PHRASE_TEMPLATES = {
-    "<V>" => nil,
-    "<V> on" => nil,
-    "<N><V>" => nil,
-    "<VP> and <VP>" => 10,
-    "fucking <VP>" => nil
+  CLASSIC = {
+    max_length: 200,
+    prevent_repeats: true,
+    code_meanings: {
+      "<N>" => :noun,
+      "<V>" => :verb,
+      "<A>" => :adjective,
+      "<NP>" => :noun_phrase,
+      "<VP>" => :verb_phrase
+    },
+    sentence_length_weights: [0, 0, 50, 50, 200, 100, 50],
+    nouns: {
+      "bad" => nil,
+      "plant" => nil,
+      "planter" => nil,
+      "dumpster" => nil,
+      "fat" => nil,
+      "kid" => nil,
+      "garbage" => nil,
+      "trash" => nil,
+      "scum" => nil,
+      "pub" => nil,
+      "clown" => nil,
+      "fuck" => nil,
+      "fag" => nil,
+      "nerd" => nil,
+      "tryhard" => nil,
+      "dump" => nil
+    },
+    
+    verbs: {
+      "wrecked" => nil,
+      "blasted" => nil,
+      "rolled" => nil,
+      "stomped" => nil
+    },
+    adjectives: {
+      "fucking" => nil,
+      "planting" => nil,
+      "typical" => nil,
+      "public" => nil
+    },
+    noun_phrase_templates: {
+      "<N>" => nil,
+      "<A> <NP>" => nil,
+      "<N><N>" => nil,
+      "<NP> <NP>" => nil
+    },
+    verb_phrase_templates: {
+      "<V>" => nil,
+      "fucking <VP>" => nil,
+      "fucking <VP> on" => nil,
+      "<V> on" => nil
+    },
+    insult_templates: {
+      "You're a <NP>" => nil,
+      "Get <VP>" => 50,
+      "Get <VP>, <NP>" => 50,
+      "What a <NP>" => nil,
+      "Typical <NP>" => nil
+    }
   }
   
-  INSULT_TEMPLATES = {
-    "You're a <NP>" => nil,
-    "You're a <NP> and a <NP>" => nil,
-    "You're a <NP> and a <NP> to boot" => 1,
-    "You're a <NP> and a <NP>, not to mention a <NP>" => 5,
-    "You're just a <NP>" => nil,
-    "Such a <NP>" => nil,
-    "Get <VP>" => nil,
-    "Get <VP>, <NP>" => nil,
-    "Get <VP>, you <NP>" => nil,
-    "You're like a <NP> getting <VP>" => 2,
-    "You get <VP> every day of the week you <NP>" => 2,
-    "Don't forget to get <VP>, <NP>" => 2,
-    "Typical <NP>" => 200
-  }
-  
-  def noun
-    weighted_sample(NOUNS)
+  def noun(assets)
+    weighted_sample(assets[:nouns])
   end
   
-  def noun_singlet
-    weighted_sample(NOUN_SINGLETS)
+  def noun_singlet(assets)
+    weighted_sample(assets[:noun_singlets])
   end
   
-  def verb
-    weighted_sample(VERBS)
+  def verb(assets)
+    weighted_sample(assets[:verbs])
   end
   
-  def adjective
-    weighted_sample(ADJECTIVES)
+  def adjective(assets)
+    weighted_sample(assets[:adjectives])
   end
   
-  def noun_phrase
-    sample = evaluate_template(weighted_sample(NOUN_PHRASE_TEMPLATES))
-    sample.split(' ').length < 3 ? sample : noun_phrase
+  def noun_phrase(assets)
+    sample = evaluate_template(weighted_sample(assets[:noun_phrase_templates]), assets)
+    sample.split(' ').length < 3 ? sample : noun_phrase(assets)
   end
   
-  def verb_phrase
-    evaluate_template(weighted_sample(VERB_PHRASE_TEMPLATES))
+  def verb_phrase(assets)
+    evaluate_template(weighted_sample(assets[:verb_phrase_templates]), assets)
   end
   
-  def insult(length = nil)
-    result = evaluate_template(weighted_sample(INSULT_TEMPLATES))
-    until permit_insult?(result, length)
-      result = evaluate_template(weighted_sample(INSULT_TEMPLATES))
+  def insult(length = nil, assets = default)
+    result = evaluate_template(weighted_sample(assets[:insult_templates]), assets)
+    until permit_insult?(result, length, assets)
+      result = evaluate_template(weighted_sample(assets[:insult_templates]), assets)
     end
     result
   end
   
-  def generate_insult(with_weights = true)
-    return insult unless with_weights
-
-    swap_a_for_an(insult(pick_length))
+  def generate_insult(assets = DEFAULT)
+    assets = CLASSIC if assets == "classic"
+    swap_a_for_an(insult(pick_length(assets), assets))
   end
   
-  def evaluate_template(template)
+  def evaluate_template(template, assets)
     begin
-      return template if no_codes?(template)
-    
+      return template if no_codes?(template, assets)
       result = template.dup
-      CODE_MEANINGS.each do |code, method_name|
-        result.gsub!(code) { |c| send(method_name) } if result.match(code)
+      
+      assets[:code_meanings].each do |code, method_name|
+        result.gsub!(code) { |c| self.send(method_name, assets) } if result.match(code)
       end
       
       result
     rescue
-      return evaluate_template(template)
+      puts $!.backtrace
+      return evaluate_template(template, assets)
     end
   end
   
-  def no_codes?(template)
-    CODE_MEANINGS.keys.none? { |code| template.match(code) }
+  def no_codes?(template, assets)
+    assets[:code_meanings].keys.none? { |code| template.match(code) }
   end
   
   def weighted_sample(weighted_hash)
@@ -192,8 +261,8 @@ module StaticPagesHelper
     sentence.split(' ').count == length
   end
   
-  def permit_insult?(insult, length)
-    permit_length?(insult, length) && (PREVENT_REPEATS && !repeated_words?(insult))
+  def permit_insult?(insult, length, assets)
+    permit_length?(insult, length) && (assets[:prevent_repeats] && !repeated_words?(insult))
   end
   
   def swap_a_for_an(string)
@@ -211,9 +280,9 @@ module StaticPagesHelper
     words.join(' ')
   end
   
-  def pick_length
-    probabilities_sum = SENTENCE_LENGTH_WEIGHTS.inject(&:+)
-    SENTENCE_LENGTH_WEIGHTS.each_with_index do |weight, i|
+  def pick_length(assets)
+    probabilities_sum = assets[:sentence_length_weights].inject(&:+)
+    assets[:sentence_length_weights].each_with_index do |weight, i|
       return i if weight > rand(probabilities_sum)
       probabilities_sum -= weight
     end

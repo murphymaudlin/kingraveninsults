@@ -1,13 +1,4 @@
 Kingraveninsults::Application.routes.draw do
-  get "users/new"
-
-  get "users/create"
-
-  get "users/destroy"
-
-  get "users/edit"
-
-  get "users/update"
-
+  match "/classic" => "static_pages#classic"
   root to: "StaticPages#index"
 end
