@@ -34,7 +34,8 @@ module StaticPagesHelper
     "ass" => nil,
     "can" => nil,
     "dick" => nil,
-    "nub" => nil
+    "nub" => nil,
+    "bin" => nil
   }
   
   NOUN_SINGLETS = {
