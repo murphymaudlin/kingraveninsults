@@ -211,7 +211,6 @@ module StaticPagesHelper
       "You look <A> today" =>nil,
       "Stay <A>, you <NP>" => nil
     }
-
   }
 
   def noun(assets)
