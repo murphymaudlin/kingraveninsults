@@ -6,7 +6,7 @@ module StaticPagesHelper
 
     code_meanings: {
       "<N>" => :noun,
-      "<NS>" => :noun_singlet,
+      "<NS>" => :noun_single,
       "<V>" => :verb,
       "<A>" => :adjective,
       "<NP>" => :noun_phrase,
@@ -36,73 +36,74 @@ module StaticPagesHelper
       "can" => nil,
       "dick" => nil,
       "nub" => nil,
-      "bin" => nil
+      "bin" => nil,
+      "fucker" => nil
     },
 
-    noun_singlets: {
-      "tryhard" => nil,
-      "shitter" => nil,
-      "whale" => 5,
-      "walrus" => 5
+    noun_singles: {
+      "tryhard"     => nil,
+      "shitter"     => nil,
+      "whale"       => 5,
+      "walrus"      => 5
     },
 
     verbs: {
-      "wrecked" => nil,
-      "blasted" => nil,
-      "rolled" => nil,
-      "shitted" => nil,
-      "fucked" => nil,
-      "canned" => nil,
-      "roasted" => nil,
-      "YOLO swagged" => 10,
-      "rolled" => nil
+      "wrecked"       => nil,
+      "blasted"       => nil,
+      "rolled"        => nil,
+      "shitted"       => nil,
+      "fucked"        => nil,
+      "canned"        => nil,
+      "roasted"       => nil,
+      "YOLO swagged"  => 10,
+      "rolled"        => nil
     },
 
     adjectives: {
-      "planting" => nil,
-      "fucking" => nil,
-      "typical" => nil,
-      "feeding" => nil,
-      "huge" => nil,
-      "mammoth" => nil,
-      "massive" => nil,
-      "shitty" => nil,
-      "public" => nil
+      "planting"      => nil,
+      "fucking"       => nil,
+      "typical"       => nil,
+      "feeding"       => nil,
+      "huge"          => nil,
+      "mammoth"       => nil,
+      "massive"       => nil,
+      "shitty"        => nil,
+      "public"        => nil
     },
 
     noun_phrase_templates: {
-      "<N>"     => nil,
-      "<NS>" => 50,
-      "<N><N>"     => nil,
-      "<NP> <NP>" => 50,
-      "<A> <NP>" => nil
+      "<N>"           => nil,
+      "<NS>"          => 50,
+      "<N><N>"        => nil,
+      "<NP> <NP>"     => 50,
+      "<A> <NP>"      => nil
     },
 
     verb_phrase_templates: {
-      "<V>" => nil,
-      "<V> on" => nil,
-      "<N><V>" => nil,
+      "<V>"           => nil,
+      "<V> on"        => nil,
+      "<N><V>"        => nil,
       "<VP> and <VP>" => 10,
-      "fucking <VP>" => nil
+      "fucking <VP>"  => nil
     },
 
     insult_templates: {
-      "You're a <NP>" => nil,
-      "You're a <NP> and a <NP>" => nil,
-      "You're a <NP> and a <NP> to boot" => 1,
-      "You're a <NP> and a <NP>, not to mention a <NP>" => 10,
-      "You're just a <NP>" => nil,
-      "You're such a <NP>" => nil,
-      "Such a <NP>" => nil,
-      "Get <VP>" => nil,
-      "Get <VP>, <NP>" => nil,
-      "Get <VP>, you <NP>" => nil,
-      "You're like a <NP> getting <VP>" => 10,
-      "You get <VP> every day of the week you <NP>" => 10,
-      "Don't forget to get <VP>, <NP>" => 10,
-      "Typical <NP>" => nil,
-      "<NP> detected" => nil,
-      "I've never seen such a <A> <NP>" => 4
+      "You're a <NP>"                                     => nil,
+      "You're a <NP> and a <NP>"                          => nil,
+      "You're a <NP> and a <NP> to boot"                  => 1,
+      "You're a <NP> and a <NP>, not to mention a <NP>"   => 10,
+      "You're just a <NP>"                                => nil,
+      "You're such a <NP>"                                => nil,
+      "Such a <NP>"                                       => nil,
+      "Get <VP>"                                          => nil,
+      "Get <VP>, <NP>"                                    => nil,
+      "Get <VP>, you <NP>"                                => nil,
+      "You're like a <NP> getting <VP>"                   => 10,
+      "You get <VP> every day of the week you <NP>"       => 10,
+      "Don't forget to get <VP>, <NP>"                    => 10,
+      "Typical <NP>"                                      => nil,
+      "<NP> detected"                                     => nil,
+      "I've never seen such a <A> <NP>"                   => 4
     }
   }
 
@@ -118,54 +119,54 @@ module StaticPagesHelper
     },
     sentence_length_weights: [0, 0, 50, 50, 200, 100, 50],
     nouns: {
-      "bad" => nil,
-      "plant" => nil,
-      "planter" => nil,
-      "dumpster" => nil,
-      "fat" => nil,
-      "kid" => nil,
-      "garbage" => nil,
-      "trash" => nil,
-      "scum" => nil,
-      "pub" => nil,
-      "clown" => nil,
-      "fuck" => nil,
-      "fag" => nil,
-      "nerd" => nil,
-      "tryhard" => nil,
-      "dump" => nil
+      "bad" =>        nil,
+      "plant" =>      nil,
+      "planter" =>    nil,
+      "dumpster" =>   nil,
+      "fat" =>        nil,
+      "kid" =>        nil,
+      "garbage" =>    nil,
+      "trash" =>      nil,
+      "scum" =>       nil,
+      "pub" =>        nil,
+      "clown" =>      nil,
+      "fuck" =>       nil,
+      "fag" =>        nil,
+      "nerd" =>       nil,
+      "tryhard" =>    nil,
+      "dump" =>       nil
     },
 
     verbs: {
-      "wrecked" => nil,
-      "blasted" => nil,
-      "rolled" => nil,
-      "stomped" => nil
+      "wrecked" =>    nil,
+      "blasted" =>    nil,
+      "rolled" =>     nil,
+      "stomped" =>    nil
     },
     adjectives: {
-      "fucking" => nil,
-      "planting" => nil,
-      "typical" => nil,
-      "public" => nil
+      "fucking" =>    nil,
+      "planting" =>   nil,
+      "typical" =>    nil,
+      "public" =>     nil
     },
     noun_phrase_templates: {
-      "<N>" => nil,
-      "<A> <NP>" => nil,
-      "<N><N>" => nil,
-      "<NP> <NP>" => nil
+      "<N>" =>            nil,
+      "<A> <NP>" =>       nil,
+      "<N><N>" =>         nil,
+      "<NP> <NP>" =>      nil
     },
     verb_phrase_templates: {
-      "<V>" => nil,
-      "fucking <VP>" => nil,
+      "<V>" =>            nil,
+      "fucking <VP>" =>   nil,
       "fucking <VP> on" => nil,
-      "<V> on" => nil
+      "<V> on" =>         nil
     },
     insult_templates: {
-      "You're a <NP>" => nil,
-      "Get <VP>" => 50,
-      "Get <VP>, <NP>" => 50,
-      "What a <NP>" => nil,
-      "Typical <NP>" => nil
+      "You're a <NP>" =>    nil,
+      "Get <VP>" =>         50,
+      "Get <VP>, <NP>" =>   50,
+      "What a <NP>" =>      nil,
+      "Typical <NP>" =>     nil
     }
   }
 
@@ -176,49 +177,74 @@ module StaticPagesHelper
       "<N>" => :noun,
       "<V>" => :verb,
       "<A>" => :adjective,
-      "<NP>" => :noun_phrase
+      "<NP>" => :noun_phrase,
+      "<NS>" => :noun_single
     },
-    sentence_length_weights: [0, 0, 0, 100, 100, 100],
+    sentence_length_weights: [0, 0, 0, 50, 100, 50, 0, 25, 25],
     nouns: {
-      "puppy" => nil,
-      "bunny" => nil,
-      "angel" => nil,
-      "butterfly" => 50,
-      "cupcake" => nil,
-      "sweetiepie" => nil,
-      "cookie" => nil,
-      "darling" => nil,
-      "flower" => 50,
-      "pot roast" => 1
+      "puppy" =>      nil,
+      "bunny" =>      nil,
+      "angel" =>      nil,
+      "cookie" =>     nil,
+      "darling" =>    nil,
+      "flower" =>     50,
+      "star" =>       nil,
+      "skunk" =>      1,
+      "honey" =>      nil
     },
     adjectives: {
-      "wonderful" => nil,
-      "kind" => nil,
-      "fluffy" => nil,
-      "caring" => nil,
-      "sweet" => nil,
-      "cuddly" => nil,
-      "radiant" => 25,
-      "sunny" => nil,
-      "cheery" => nil,
-      "beautiful" => nil,
-      "magical" => nil,
-      "merry" => nil,
-      "darling" => nil
+      "wonderful" =>  nil,
+      "kind" =>       nil,
+      "fluffy" =>     nil,
+      "caring" =>     nil,
+      "sweet" =>      nil,
+      "cuddly" =>     nil,
+      "radiant" =>    50,
+      "sunny" =>      nil,
+      "cheery" =>     nil,
+      "beautiful" =>  nil,
+      "magical" =>    nil,
+      "merry" =>      nil,
+      "darling" =>    nil,
+      "melodious" =>  nil,
+      "gorgeous" =>   nil,
+      "marvelous" =>  nil,
+      "fabulous" =>   nil,
+      "delightful" => nil,
+      "blessed" =>    nil,
+      "graceful" =>   nil,
+      "sparkling" =>  nil
+    },
+    noun_singles: {
+      "sweetiepie" => nil,
+      "honeybunny" => nil,
+      "songbird" =>   nil,
+      "pot roast" =>  1,
+      "cupcake" =>    nil,
+      "butterfly" =>  50
     },
     noun_phrase_templates: {
-      "<N>" => nil,
-      "<N><N>" => 25,
-      "<A> <N>" => nil,
-      "<A> <N><N>" => 25,
-      "<A>, <A> <N>" => nil,
-      "<A>, <A> <N><N>" => 25
+      "<N>" =>              nil,
+      "<NS>" =>             50,
+      "<N><N>" =>           25,
+      "<A> <N>" =>          nil,
+      "<A> <N><N>" =>       25,
+      "<A>, <A> <N>" =>     nil,
+      "<A>, <A> <N><N>" =>  25
     },
     insult_templates: {
-      "You're a <NP>" => nil,
-      "You're such a <NP>" => nil,
-      "You look <A> today" =>nil,
-      "Stay <A>, you <NP>" => nil
+      "You're a <NP>" =>                        nil,
+      "You are a <NP>" =>                       nil,
+      "You're always so <A>, <N><N>" =>         50,
+      "You're always so <A> and <A>, <N><N>" => 50,
+      "You're such a <NP>" =>                   nil,
+      "You look <A> today" =>                   nil,
+      "Stay <A>, you <NP>" =>                   nil,
+      "I hope you have a <A> day" =>            30,
+      "I hope you have a <A> day, <N>" =>       30,
+      "I hope you have a <A> day, <N><N>" =>    30,
+      "You're the most <A> <N> I know" =>       50,
+      "You're the most <A> <N><N> I know" =>    50
     }
   }
 
@@ -226,8 +252,8 @@ module StaticPagesHelper
     weighted_sample(assets[:nouns])
   end
 
-  def noun_singlet(assets)
-    weighted_sample(assets[:noun_singlets])
+  def noun_single(assets)
+    weighted_sample(assets[:noun_singles])
   end
 
   def verb(assets)

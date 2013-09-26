@@ -8,5 +8,6 @@ class StaticPagesController < ApplicationController
   end
 
   def complement
+    render :complement
   end
 end
