@@ -92,6 +92,7 @@ module StaticPagesHelper
       "You're a <NP> and a <NP> to boot" => 1,
       "You're a <NP> and a <NP>, not to mention a <NP>" => 10,
       "You're just a <NP>" => nil,
+      "You're such a <NP>" => nil,
       "Such a <NP>" => nil,
       "Get <VP>" => nil,
       "Get <VP>, <NP>" => nil,
@@ -175,17 +176,22 @@ module StaticPagesHelper
       "<N>" => :noun,
       "<V>" => :verb,
       "<A>" => :adjective,
-      "<NP>" => :noun_phrase,
-      "<VP>" => :verb_phrase,
-      "<NS>" => :noun_single
+      "<NP>" => :noun_phrase
     },
-    sentence_length_weights: [0, 0, 50, 50, 200, 100, 50],
+    sentence_length_weights: [0, 0, 0, 100, 100, 100],
     nouns: {
       "puppy" => nil,
       "bunny" => nil,
-      "angel" => nil
+      "angel" => nil,
+      "butterfly" => 50,
+      "cupcake" => nil,
+      "sweetiepie" => nil,
+      "cookie" => nil,
+      "darling" => nil,
+      "flower" => 50,
+      "pot roast" => 1
     },
-    adjective: {
+    adjectives: {
       "wonderful" => nil,
       "kind" => nil,
       "fluffy" => nil,
@@ -195,7 +201,10 @@ module StaticPagesHelper
       "radiant" => 25,
       "sunny" => nil,
       "cheery" => nil,
-      "beautiful" => nil
+      "beautiful" => nil,
+      "magical" => nil,
+      "merry" => nil,
+      "darling" => nil
     },
     noun_phrase_templates: {
       "<N>" => nil,
@@ -207,7 +216,7 @@ module StaticPagesHelper
     },
     insult_templates: {
       "You're a <NP>" => nil,
-      "You're like a <NP>" => nil,
+      "You're such a <NP>" => nil,
       "You look <A> today" =>nil,
       "Stay <A>, you <NP>" => nil
     }
@@ -263,7 +272,6 @@ module StaticPagesHelper
 
       result
     rescue
-      puts $!.backtrace
       return evaluate_template(template, assets)
     end
   end
