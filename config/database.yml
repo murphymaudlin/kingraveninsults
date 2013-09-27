@@ -7,7 +7,7 @@ development:
   password:
 	  
 test:
-  adapter: sqlite3
+  adapter: postgresql
   encoding: unicode
   database: kingraveninsults_test
   pool: 5
