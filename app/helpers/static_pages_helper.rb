@@ -13,7 +13,7 @@ module StaticPagesHelper
       "<VP>" => :verb_phrase
     },
 
-    sentence_length_weights: [0, 0, 10, 50, 200, 200, 100, 10, 2, 2, 1],
+    sentence_length_weights: [0, 0, 10, 50, 200, 200, 100, 10, 5, 5, 5, 5],
 
     nouns: {
       "bad" => nil,
@@ -55,7 +55,6 @@ module StaticPagesHelper
       "fucked"        => nil,
       "canned"        => nil,
       "roasted"       => nil,
-      "YOLO swagged"  => 10,
       "rolled"        => nil
     },
 
@@ -90,7 +89,7 @@ module StaticPagesHelper
     insult_templates: {
       "You're a <NP>"                                     => nil,
       "You're a <NP> and a <NP>"                          => nil,
-      "You're a <NP> and a <NP> to boot"                  => 1,
+      "You're a <NP> and a <NP> to boot"                  => 10,
       "You're a <NP> and a <NP>, not to mention a <NP>"   => 10,
       "You're just a <NP>"                                => nil,
       "You're such a <NP>"                                => nil,
@@ -103,7 +102,8 @@ module StaticPagesHelper
       "Don't forget to get <VP>, <NP>"                    => 10,
       "Typical <NP>"                                      => nil,
       "<NP> detected"                                     => nil,
-      "I've never seen such a <A> <NP>"                   => 4
+      "I've never seen such a <A> <NP>"                   => nil,
+      "Get YOLO swagged, <NP>"                            => 1
     }
   }
 
@@ -281,10 +281,22 @@ module StaticPagesHelper
     result
   end
 
-  def generate_insult(assets = DEFAULT)
-    assets = CLASSIC if assets == "classic"
-    assets = COMPLEMENTS if assets == "complement"
+  def generate_insult(type = "default")
+    assets = determine_assets(type)
     swap_a_for_an(insult(pick_length(assets), assets))
+  end
+
+  def determine_assets(string)
+    case string
+    when "default"
+      return DEFAULT
+    when "classic"
+      return CLASSIC
+    when "complement"
+      return COMPLEMENTS
+    end
+
+    nil
   end
 
   def evaluate_template(template, assets)

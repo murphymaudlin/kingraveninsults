@@ -1,2 +1,54 @@
-<p><%= generate_insult %></p>
+
+<p id="insult-field"><%= generate_insult %></p>
+<button id="spin">spin</button><br>
+<script>
+$(document).ready(function() {
+  var previousInsult = "";
+
+  var closeMatch = function(insult1, insult2) {
+    var words1 = insult1.split(' ');
+    var words2 = insult2.split(' ');
+    var matches = 0;
+
+    words1.forEach(function (word1) {
+      words2.forEach(function (word2) {
+        result = (word1 == word2)
+        if (word2 == word1) {
+          matches += 1;
+        }
+      });
+    });
+    return (matches > 1);
+  }
+
+  $('#spin').on ('click', function(event){
+    var ajaxRequest;
+
+    $insultField = $('#insult-field');
+
+    ajaxRequest = function() {
+      $.ajax({
+        url: '/new_insult/default',
+        type: 'GET',
+        dataType: 'text',
+        success: function( resp ) {
+          console.log("resp: " + resp);
+          console.log("previousInsult: " + previousInsult)
+
+          if (closeMatch(resp, previousInsult)) {
+            console.log("found match");
+            ajaxRequest();
+          } else {
+            $insultField.text(resp);
+            previousInsult = resp;
+          }
+        }
+      });
+    };
+
+    ajaxRequest();
+  });
+});
+</script>
+
 <%= link_to "info", "/info" %>
