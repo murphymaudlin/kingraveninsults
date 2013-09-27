@@ -6,7 +6,6 @@ gem 'rails', '3.2.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -27,6 +26,8 @@ gem 'pry-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'sqlite3'
+  
 end
 
 gem 'bcrypt-ruby', require: 'bcrypt'
